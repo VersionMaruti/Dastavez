@@ -21,6 +21,10 @@ import {
   Copy,
 } from "lucide-react";
 
+// ✅ Maruti-NEW : Add zoom state
+const ZOOM_LEVELS = [50, 75, 100, 125, 150, 200];
+
+
 // Enhanced schema similar to Google Docs
 const schema = new Schema({
   nodes: {
@@ -93,6 +97,10 @@ export default function Home() {
   const [docTitle, setDocTitle] = useState("Untitled Document");
   const [isConnected, setIsConnected] = useState(false);
   const [userCount, setUserCount] = useState(0);
+
+   const [zoomLevel, setZoomLevel] = useState(100); //✅ Maruti-NEW :[ZOOM] 
+
+
 
   const generateRandomName = () => {
     const adjectives = ["Smart", "Creative", "Brilliant", "Quick", "Clever"];
@@ -331,6 +339,23 @@ export default function Home() {
                 >
                   <Download className="w-4 h-4" />
                 </button>
+
+                {/* ✅Maruti-NEW : ZOOM DROPDOWN added near Share button */}
+                <select
+                  value={zoomLevel}
+                  onChange={(e) => setZoomLevel(parseInt(e.target.value))}
+                  className="text-sm border rounded px-2 py-1 focus:outline-none"
+                  title="Zoom"
+                >
+                  {ZOOM_LEVELS.map((z) => (
+                    <option key={z} value={z}>
+                      {z}%
+                    </option>
+                  ))}
+                </select>
+
+
+                
                 <button
                   onClick={handleShare}
                   className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -385,6 +410,8 @@ export default function Home() {
               outline: "none",
               maxWidth: "100%",
               wordWrap: "break-word",
+              transform: `scale(${zoomLevel / 100})`, // ✅Maruti-NEW : Apply zoom
+              transformOrigin: "top left", // ✅Maruti-NEW : Keep origin fixed
             }}
           />
         </div>
