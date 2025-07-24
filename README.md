@@ -60,4 +60,12 @@ CRDT ensures that:
 ## 🧪 Basic Example (Yjs + WebSocket)
 
 ```bash
-npm install yjs y-websocket
+# 1. Clone the repo
+git clone https://github.com/your-username/yjs-crdt-editor.git
+cd yjs-crdt-editor
+
+# 2. Install dependencies
+npm install
+
+# 3. Run development server
+npm run dev
